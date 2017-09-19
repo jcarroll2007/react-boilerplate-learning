@@ -24,7 +24,7 @@ const plugins = [
     failOnError: false, // show a warning when there is a circular dependency
   }),
   new webpack.ProvidePlugin({
-    ReactDOM: 'react-dom'
+    ReactDOM: 'react-dom',
     React: 'react'
   })
 ];
