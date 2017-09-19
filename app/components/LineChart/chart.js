@@ -21,15 +21,13 @@ const LineChart = () => {
         .data([d]);
 
       const rectEnter = rect.enter().append('rect')
-        .attr('height', 10)
-        .attr('width', 10)
         .attr('fill', '#33CB96');
 
       rect = rect.merge(rectEnter)
         .transition()
         .duration(1000)
-        .attr('x', (width / 2))
-        .attr('y', (300 - (d * 10)));
+        .attr('height', (d) => d * 2)
+        .attr('width', (d) => d * 2);
     });
   };
 

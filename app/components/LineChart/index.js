@@ -6,6 +6,8 @@
 
 import React from 'react';
 import { select } from 'd3-selection';
+import { Slider } from '@blueprintjs/core';
+import '@blueprintjs/core/dist/blueprint.css';
 
 import chart from './chart';
 
@@ -15,13 +17,14 @@ class LineChart extends React.Component { // eslint-disable-line react/prefer-st
     super(props);
 
     this.state = {
-      value: 5,
+      value: 50,
     };
 
     this.chartFn = chart();
 
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleDecrement = this.handleDecrement.bind(this);
+    this.handleSliderChange = this.handleSliderChange.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +33,12 @@ class LineChart extends React.Component { // eslint-disable-line react/prefer-st
 
   componentDidUpdate() {
     this.updateChart();
+  }
+
+  handleSliderChange(val) {
+    this.setState({
+      value: val,
+    });
   }
 
   updateChart() {
@@ -52,10 +61,12 @@ class LineChart extends React.Component { // eslint-disable-line react/prefer-st
 
   render() {
     return (
-      <div>
-        <button onClick={this.handleIncrement}>+1</button>
-        <button onClick={this.handleDecrement}>-1</button>
-        {this.state.value}
+      <div style={{ padding: '15px' }}>
+        Drag the slider to change the size of the rectangle.
+        <Slider
+          min={0} max={100} stepSize={10} labelStepSize={10}
+          onChange={this.handleSliderChange} value={this.state.value}
+        />
         <div ref={(div) => (this.chartContainer = div)} />
       </div>
     );
